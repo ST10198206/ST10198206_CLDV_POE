@@ -1,0 +1,109 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: Arial, sans-serif;
+}
+
+
+
+
+#myVideo {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -1;
+    min-width: 100%;
+}
+
+    #myVideo video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 90%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+    }
+/* Add some content at the bottom of the video/page */
+.content {
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button {
+    border-radius: 4px;
+    background-color: #CBC3E3;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    width: 200px;
+    height: 30%;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+    .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+button span a {
+    color: #FFFFFF;
+}
+
+    button span a:hover {
+        color: #FFFFFF;
+    }
+
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+    .button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }

@@ -1,0 +1,75 @@
+﻿body {
+   
+    background-image: url(/media/Craft.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}
+
+
+.container {
+   
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.item {
+    background-color: #FAF9F6;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+    .item img {
+        max-width: 30%;
+        height: auto;
+    }
+
+.item-info {
+    padding: 10px;
+}
+
+    .item-info h3 {
+        margin-top: 0;
+    }
+
+    .item-info p {
+        margin-bottom: 10px;
+    }
+.item button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 10px 25px;
+    color: black;
+    background-color: #5dbea3;
+    text-align: center;
+    cursor: pointer;
+}
+
+    .item button:hover {
+        background-color: #33b249;
+        color: white;
+    }
+
+.Additembtn {
+    color: black;
+    text-decoration: none;
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #4681f4;
+    text-align: center;
+    cursor: pointer;
+}
+
+    .Additembtn:hover {
+        background-color: #5783db;
+        color: white;
+    }

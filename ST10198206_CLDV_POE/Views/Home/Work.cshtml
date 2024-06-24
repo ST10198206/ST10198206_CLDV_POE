@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Work";
+}
+<link rel="stylesheet" href="~/css/Work.css" asp-append-version="true" />
+
+<body>
+    <div class="container">
+        <h2>Craft Items on Sale</h2>
+
+        <div class="item" data-name="Handmade Clay Pot" data-description="A beautiful clay pot crafted by skilled artisans." data-price="20.99" data-image="~/media/ClayPot.jpg">
+            <img src="~/media/ClayPot.jpg" alt="Craft Item 1">
+            <div class="item-info">
+                <h3>Handmade Clay Pot</h3>
+                <p>A beautiful clay pot crafted by skilled artisans.</p>
+                <p>Price: R20.99</p>
+                <button class="buy-btn">Buy me</button>
+            </div>
+        </div>
+
+        <div class="item" data-name="Handwoven Basket" data-description="An intricately handwoven basket, perfect for storing small items." data-price="15.49" data-image="~/media/Basket.jpg">
+            <img src="~/media/Basket.jpg" alt="Craft Item 2">
+            <div class="item-info">
+                <h3>Handwoven Basket</h3>
+                <p>An intricately handwoven basket, perfect for storing small items.</p>
+                <p>Price: R15.49</p>
+                <button class="buy-btn">Buy me</button>
+            </div>
+        </div>
+
+        <div class="item" data-name="Wooden Sculpture" data-description="A finely carved wooden sculpture depicting nature's beauty." data-price="30.00" data-image="~/media/Sculpture.jpg">
+            <img src="~/media/Sculpture.jpg" alt="Craft Item 3">
+            <div class="item-info">
+                <h3>Wooden Sculpture</h3>
+                <p>A finely carved wooden sculpture depicting nature's beauty.</p>
+                <p>Price: R30.00</p>
+                <button class="buy-btn">Buy me</button>
+            </div>
+        </div>
+
+        <p>
+            <a class="Additembtn" asp-area="" asp-controller="Items" asp-action="Index">Add Item</a>
+        </p>
+    </div>
+
+    <script>
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const item = this.closest('.item');
+                const name = item.getAttribute('data-name');
+                const description = item.getAttribute('data-description');
+                const price = item.getAttribute('data-price');
+                const image = item.getAttribute('data-image');
+
+                const cartItem = {
+                    name: name,
+                    description: description,
+                    price: parseFloat(price),
+                    image: image,
+                    quantity: 1
+                };
+
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const existingItemIndex = cart.findIndex(i => i.name === name);
+
+                if (existingItemIndex > -1) {
+                    cart[existingItemIndex].quantity += 1;
+                } else {
+                    cart.push(cartItem);
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${name} has been added to the cart!`);
+            });
+        });
+    </script>
+</body>

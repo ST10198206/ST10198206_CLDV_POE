@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+}
+<link rel="stylesheet" href="~/css/Contact.css" asp-append-version="true" />
+
+<body>
+    <p>
+        <h3>Join Our Community:</h3>
+        Connect with fellow crafters, share your projects, and exchange tips and ideas in our vibrant online community. 
+        Whether you're seeking advice, inspiration, or simply want to chat with like-minded individuals, you'll find a welcoming space here at KhumaloCraft.
+    </p>
+    <br />
+    <div class="container">
+        <h1>Contact Us</h1>
+        <form id="contactForm" action="#" method="post" onsubmit="return validateForm()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="mobile">Mobile:</label>
+            <input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10}">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <div class="form-buttons">
+                <input type="submit" value="Submit">
+                <input type="button" value="Clear" onclick="clearForm()">
+            </div>
+        </form>
+        <div id="formMessages"></div>
+    </div>
+
+    <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d443540.162777462!2d30.654111143986736!3d-29.715196047083452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef707d5d4d46227%3A0xce81abc7c8dd91c!2sCrafts%20%26%20Creations!5e0!3m2!1sen!2sza!4v1711971567828!5m2!1sen!2sza" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <br />
+
+    <p>Mobile: 031 505 889 <ion-icon name="call-outline"></ion-icon></p>
+    <p>Email: khumalocraft@gmail.com <ion-icon name="mail-outline"></ion-icon></p>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let mobile = document.getElementById("mobile").value;
+            let message = document.getElementById("message").value;
+            let messages = [];
+
+            if (name.length < 2) {
+                messages.push("Name must be at least 2 characters.");
+            }
+
+           
+
+            if (!/^[0-9]{10}$/.test(mobile)) {
+                messages.push("Mobile number must be 10 digits.");
+            }
+
+            if (message.length < 10) {
+                messages.push("Message must be at least 10 characters.");
+            }
+
+            if (messages.length > 0) {
+                let formMessages = document.getElementById("formMessages");
+                formMessages.innerHTML = messages.join("<br>");
+                formMessages.style.color = "red";
+                return false;
+            }
+
+            document.getElementById("formMessages").innerHTML = "Form submitted successfully!";
+            document.getElementById("formMessages").style.color = "green";
+            return true;
+        }
+
+        function clearForm() {
+            document.getElementById("contactForm").reset();
+            document.getElementById("formMessages").innerHTML = "";
+        }
+    </script>
+</body>

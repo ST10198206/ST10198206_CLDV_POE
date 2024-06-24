@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Cart";
+}
+<link rel="stylesheet" href="~/css/Cart.css" asp-append-version="true" />
+
+<body>
+    <div class="container">
+        <h2>Your Cart</h2>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Cart items will be inserted here dynamically -->
+            </tbody>
+        </table>
+        <div class="cart-summary">
+            <p><strong>Subtotal:</strong> <span id="subtotal">R0.00</span></p>
+            <p><strong>Tax:</strong> <span id="tax">R0.00</span></p>
+            <p><strong>Total:</strong> <span id="total">R0.00</span></p>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                            <td><img src="${item.image}" alt="${item.name}" class="cart-item-img"></td>
+                            <td>${item.name}</td>
+                            <td>R${item.price.toFixed(2)}</td>
+                            <td><input type="number" value="${item.quantity}" min="1" class="quantity-input" data-name="${item.name}"></td>
+                            <td>R${itemTotal.toFixed(2)}</td>
+                            <td>
+                                <button class="update-btn" data-name="${item.name}">Update</button>
+                                <button class="remove-btn" data-name="${item.name}">Remove</button>
+                            </td>
+                        `;
+
+                cartItemsContainer.appendChild(row);
+            });
+
+            const tax = subtotal * 0.1;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').textContent = `R${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `R${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `R${total.toFixed(2)}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+
+            document.querySelectorAll('.remove-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const name = this.getAttribute('data-name');
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    cart = cart.filter(item => item.name !== name);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    loadCart();
+                });
+            });
+
+            document.querySelectorAll('.update-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const name = this.getAttribute('data-name');
+                    const quantityInput = document.querySelector(`.quantity-input[data-name="${name}"]`);
+                    const newQuantity = parseInt(quantityInput.value);
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const itemIndex = cart.findIndex(item => item.name === name);
+
+                    if (itemIndex > -1) {
+                        cart[itemIndex].quantity = newQuantity;
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        loadCart();
+                    }
+                });
+            });
+        });
+    </script>
+</body>

@@ -1,0 +1,35 @@
+﻿body {
+    background-image: url(/media/About.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 910px;
+}
+
+.container {
+    max-width: 900px;
+    padding: 20px;
+    background-color: #fff;
+  
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+
+
+.highlight {
+    color: #CBC3E3;
+    font-weight: bold;
+}
